@@ -9,6 +9,7 @@ ${var1}    4
 ${var2}    6
 @{VARLIST}    4    6
 &{VARDICT}    list=@{VARLIST}
+${esccharvar}    \x34
 
 *** Test Cases ***
 My First Test
@@ -26,6 +27,10 @@ Test With Dictionary
 Test With Tag
     [Tags]    Always
     Should Not Be Equal    ${var1}    ${var2}
+
+Test Variable With Escape Chars
+    [Documentation]    This test shows that variables are text not integers and usage of escape characters
+    Should Be Equal    ${var1}    ${esccharvar}
 
 *** Keywords ***
 My Keyword
