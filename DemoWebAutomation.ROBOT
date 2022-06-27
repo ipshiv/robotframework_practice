@@ -1,5 +1,6 @@
 *** Settings ***
 Documentation    Trying Selenium lib and test automation
+Test Teardown    Close All Browsers
 Library    SeleniumLibrary
 
 *** Test Cases ***
