@@ -1,5 +1,7 @@
 *** Settings ***
 Documentation     Testing Robot Framework basic syntax. *Doc Test* _This should be italic_
+Test Setup       Log    I'm setup    DEBUG
+Test Teardown    Log    I'm Teardown INFO
 Library           OperatingSystem
 
 Default Tags      positive
@@ -36,6 +38,15 @@ Test Variable With Escape Chars
     [Documentation]    This test shows that variables are text not
     ...                integers and usage of escape characters
     Should Be Equal    ${var1}    ${esccharvar}
+
+Test With Custom Teardown
+    Log    No teardown!    INFO
+    [Teardown]    NONE
+
+Test with Custom Setup
+    [Setup]    NONE
+    Log    NoSetup!
+
 
 *** Keywords ***
 My Keyword
