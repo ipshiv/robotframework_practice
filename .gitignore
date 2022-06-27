@@ -31,3 +31,4 @@ __pycache__
 .jython_cache
 .mypy_cache/
 Result*
+*.log
