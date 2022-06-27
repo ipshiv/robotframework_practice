@@ -8,6 +8,10 @@ Default Tags      positive
 ${var1}    4
 ${var2}    6
 @{VARLIST}    4    6
+@{LONGLIST}    Hello, world!
+...            Lorem ipsum
+...            dolor sit amet, consectetur adipiscing elit
+...            Other typical output
 &{VARDICT}    list=@{VARLIST}
 ${esccharvar}    \x34
 
@@ -29,7 +33,8 @@ Test With Tag
     Should Not Be Equal    ${var1}    ${var2}
 
 Test Variable With Escape Chars
-    [Documentation]    This test shows that variables are text not integers and usage of escape characters
+    [Documentation]    This test shows that variables are text not
+    ...                integers and usage of escape characters
     Should Be Equal    ${var1}    ${esccharvar}
 
 *** Keywords ***
