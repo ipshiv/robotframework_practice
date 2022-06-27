@@ -3,6 +3,8 @@ Documentation     Testing Robot Framework basic syntax. *Doc Test* _This should 
 Test Setup       Log    I'm setup    DEBUG
 Test Teardown    Log    I'm Teardown INFO
 Library           OperatingSystem
+Library           DateTime
+Library    SeleniumLibrary
 
 Default Tags      positive
 
@@ -46,6 +48,10 @@ Test With Custom Teardown
 Test with Custom Setup
     [Setup]    NONE
     Log    NoSetup!
+
+Test with DateTime
+    ${now}    Get Current Date
+    Log    ${now}
 
 
 *** Keywords ***
