@@ -1,6 +1,7 @@
 *** Settings ***
 Documentation     Testing Robot Framework basic syntax. *Doc Test* _This should be italic_
-...
+Library           OperatingSystem
+
 Default Tags      positive
 
 *** Variables ***
@@ -25,3 +26,8 @@ Test With Dictionary
 Test With Tag
     [Tags]    Always
     Should Not Be Equal    ${var1}    ${var2}
+
+*** Keywords ***
+My Keyword
+    [Arguments]    ${path}
+    Directory Should Exist    ${path}
