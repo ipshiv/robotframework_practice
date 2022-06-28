@@ -14,12 +14,25 @@ Search On Tori
     Open Browser    https://www.tori.fi    firefox
     Maximize Browser Window
     Wait Until Page Contains Element    id=sp_message_iframe_433571
-    Select Frame    id=sp_message_iframe_433571
-    Click Button    class=sp_choice_type_11
+    TRY
+        Select Frame    id=sp_message_iframe_433571
+    EXCEPT  Element with locator 'id=sp_message_iframe_433571' not found.
+        Log    I want some cookies
+    FINALLY
+        Click Button    class=sp_choice_type_11
+        Log    Button found, agreed with cookie policy!
+    END
     Switch Window
     Input Text    id=frontSearch    levysoitin
     Click Element    xpath://*[text()='Hae']
     Wait Until Page Contains Element    id=sp_message_iframe_433571
     Select Frame    id=sp_message_iframe_433571
-    Click Button    class=sp_choice_type_11
+    TRY
+        Select Frame    id=sp_message_iframe_433571
+    EXCEPT  Element with locator 'id=sp_message_iframe_433571' not found.
+        Log    I want some cookies
+    FINALLY
+        Click Button    class=sp_choice_type_11
+        Log    Button found, agreed with cookie policy!
+    END
     Sleep    5
