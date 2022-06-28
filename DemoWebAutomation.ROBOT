@@ -18,7 +18,7 @@ Search On Tori
     Click Button    class=sp_choice_type_11
     Switch Window
     Input Text    id=frontSearch    levysoitin
-    Press Key    id=frontSearch    \ue007
+    Click Element    xpath://*[text()='Hae']
     Wait Until Page Contains Element    id=sp_message_iframe_433571
     Select Frame    id=sp_message_iframe_433571
     Click Button    class=sp_choice_type_11
