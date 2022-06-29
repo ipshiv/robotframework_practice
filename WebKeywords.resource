@@ -8,7 +8,13 @@ Library    Collections
 Accept Cookies On Tori
     [Documentation]    Waits for iFrame and accept all Cookies
     [Arguments]    ${frameid}    ${buttonclass}
-    Wait Until Page Contains Element    id=${frameid}
+    TRY
+        Wait Until Page Contains Element    id=${frameid}
+    EXCEPT  Element 'id=${frameid}' did not appear in 5 seconds.
+        Log    No Cookies!
+        RETURN
+    END
+
     TRY
         Select Frame    id=${frameid}
     EXCEPT  Element with locator 'id=${frameid}' not found.
