@@ -12,9 +12,15 @@ Search On Tori
     ...                3. Searches for levysoitin
     ...                4. Accepts cookies again
     ...                5. Showes results for 5s
+    ${inputdata}    Read Data From xlsx    Test_table.xlsx    Sheet1    2    2    10
+    Log    ${inputdata}
     Open Browser    https://www.tori.fi    firefox
     Accept Cookies On Tori    sp_message_iframe_433571    sp_choice_type_11
-    Input Text    id=frontSearch    levysoitin
+    Input Text    id=frontSearch    ''
     Click Element    xpath://*[text()='Hae']
-    Accept Cookies On Tori    sp_message_iframe_433571    sp_choice_type_11
-    Sleep    5
+    FOR    ${data}    IN ENUMERATE    @{inputdata}[0][items]
+        Accept Cookies On Tori    sp_message_iframe_433571    sp_choice_type_11
+        Input Text    id=searchtext    ${data}
+        Click Element    xpath://*[text()='Hae']
+        Sleep    2
+    END

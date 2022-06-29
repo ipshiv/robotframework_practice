@@ -1,6 +1,8 @@
 *** Settings ***
 Documentation    Useful and reusable Keywords
 Library    SeleniumLibrary
+Library    ExcelLibrary
+Library    Collections
 
 *** Keywords ***
 Accept Cookies On Tori
@@ -12,7 +14,6 @@ Accept Cookies On Tori
     EXCEPT  Element with locator 'id=${frameid}' not found.
         Log    I want some cookies
     FINALLY
-        Click Button    class=${buttonclass}
         TRY
             Click Button    class=${buttonclass}
         EXCEPT
@@ -21,3 +22,35 @@ Accept Cookies On Tori
         Log    Button found, agreed with cookie policy!
     END
     Switch Window
+
+Read Data From xlsx
+    [Documentation]    Reads Columns and returns them as a Dictionary
+    ...                with fields named as in XLSX header
+    ...                workbook - workbook's name including extension
+    ...                sheet - sheet's name
+    ...                firstcolumn - column to start reading from (starting from 1)
+    ...                coulmnstoread - num of columns containing data (should be more than 0)
+    ...                maxdatarange -  max number of rows to read
+    [Arguments]    ${workbook}    ${sheet}    ${firstcolumn}    ${coulmnstoread}    ${maxdatarange}
+    ${retdict}    Create List
+    IF    ${coulmnstoread} == 0
+        RETURN    @{retdict}
+    END
+    IF    '${workbook}' == ''
+        RETURN    @{retdict}
+    END
+    IF    '${sheet}' == ''
+        RETURN    @{retdict}
+    END
+    Open Excel Document    ${workbook}    wb
+    Get Sheet    ${sheet}
+    ${colunminheader}    Evaluate    ${firstcolumn} - 1
+    ${headers}   Read Excel Row    1    ${colunminheader}    ${coulmnstoread}
+    FOR    ${count}    ${header}    IN ENUMERATE    @{headers}
+        Log    ${header}
+        ${columntoread}    Evaluate    ${firstcolumn} + ${count}
+        ${items}    Read Excel Column    ${columntoread}    1    ${maxdatarange}
+        &{tmpdict}    Create Dictionary    id=${header}    items=${items}
+        Append To List    ${retdict}    ${tmpdict}
+    END
+    RETURN    @{retdict}
