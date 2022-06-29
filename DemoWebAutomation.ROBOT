@@ -7,11 +7,11 @@ Resource    WebKeywords.resource
 *** Test Cases ***
 Search On Tori
     [Documentation]    Next script does:
-    ...                1. Opens tori.fi
+    ...                1. Reads input data from xlsx
+    ...                2. Opens tori.fi
     ...                2. Accepts cookies
-    ...                3. Searches for levysoitin
-    ...                4. Accepts cookies again
-    ...                5. Showes results for 5s
+    ...                3. Searches for data from xlsx selecting region
+    ...                4. Accepts cookies again every time tori asks
     ${inputdata}    Read Data From xlsx    Tori_search.xlsx    Sheet1    2    3    5
     Log    ${inputdata}
     Open Browser    https://www.tori.fi    headlessfirefox
