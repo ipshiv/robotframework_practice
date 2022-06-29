@@ -14,7 +14,7 @@ Search On Tori
     ...                5. Showes results for 5s
     ${inputdata}    Read Data From xlsx    Tori_search.xlsx    Sheet1    2    3    5
     Log    ${inputdata}
-    Open Browser    https://www.tori.fi    firefox
+    Open Browser    https://www.tori.fi    headlessfirefox
     Accept Cookies On Tori    sp_message_iframe_433571    sp_choice_type_11
     Input Text    id=frontSearch    ''
     Click Element    xpath://*[text()='Hae']
