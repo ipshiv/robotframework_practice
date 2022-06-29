@@ -13,6 +13,11 @@ Accept Cookies On Tori
         Log    I want some cookies
     FINALLY
         Click Button    class=${buttonclass}
+        TRY
+            Click Button    class=${buttonclass}
+        EXCEPT
+            Log    No Button!!!
+        END
         Log    Button found, agreed with cookie policy!
     END
     Switch Window
