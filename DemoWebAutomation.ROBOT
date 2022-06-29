@@ -2,6 +2,7 @@
 Documentation    Trying Selenium lib and test automation
 Test Teardown    Close All Browsers
 Library    SeleniumLibrary
+Resource    WebKeywords.resource
 
 *** Test Cases ***
 Search On Tori
@@ -12,28 +13,8 @@ Search On Tori
     ...                4. Accepts cookies again
     ...                5. Showes results for 5s
     Open Browser    https://www.tori.fi    firefox
-    Maximize Browser Window
-    Wait Until Page Contains Element    id=sp_message_iframe_433571
-    TRY
-        Select Frame    id=sp_message_iframe_433571
-    EXCEPT  Element with locator 'id=sp_message_iframe_433571' not found.
-        Log    I want some cookies
-    FINALLY
-        Click Button    class=sp_choice_type_11
-        Log    Button found, agreed with cookie policy!
-    END
-    Switch Window
+    Accept Cookies On Tori    sp_message_iframe_433571    sp_choice_type_11
     Input Text    id=frontSearch    levysoitin
     Click Element    xpath://*[text()='Hae']
-    Wait Until Page Contains Element    id=sp_message_iframe_433571
-    Select Frame    id=sp_message_iframe_433571
-
-    TRY
-        Select Frame    id=sp_message_iframe_433571
-    EXCEPT  Element with locator 'id=sp_message_iframe_433571' not found.
-        Log    I want some cookies
-    FINALLY
-        Click Button    class=sp_choice_type_11
-        Log    Button found, agreed with cookie policy!
-    END
+    Accept Cookies On Tori    sp_message_iframe_433571    sp_choice_type_11
     Sleep    5
