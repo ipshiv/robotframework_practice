@@ -8,7 +8,7 @@ For excel automation requieres ExcelLib, use it from my fork instead of official
 ## Goals or what to try:
 - [x] Basics according to documentation and elearning
 - [x] Excel files test
-- [ ] Selenium test
+- [x] Selenium test
 - [ ] Desktop automation
 - [ ] MQTT test
 - [ ] Simple UART test
