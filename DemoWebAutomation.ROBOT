@@ -18,7 +18,7 @@ Search On Tori
     Accept Cookies On Tori    sp_message_iframe_433571    sp_choice_type_11
     Input Text    id=frontSearch    ''
     Click Element    xpath://*[text()='Hae']
-    FOR    ${data}    IN ENUMERATE    @{inputdata}[0][items]
+    FOR    ${data}    IN    @{inputdata}[Message]
         Accept Cookies On Tori    sp_message_iframe_433571    sp_choice_type_11
         Input Text    id=searchtext    ${data}
         Click Element    xpath://*[text()='Hae']

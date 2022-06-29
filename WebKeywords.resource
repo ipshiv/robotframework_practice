@@ -32,15 +32,15 @@ Read Data From xlsx
     ...                coulmnstoread - num of columns containing data (should be more than 0)
     ...                maxdatarange -  max number of rows to read
     [Arguments]    ${workbook}    ${sheet}    ${firstcolumn}    ${coulmnstoread}    ${maxdatarange}
-    ${retdict}    Create List
+    &{retdict}    Create Dictionary
     IF    ${coulmnstoread} == 0
-        RETURN    @{retdict}
+        RETURN    &{retdict}
     END
     IF    '${workbook}' == ''
-        RETURN    @{retdict}
+        RETURN    &{retdict}
     END
     IF    '${sheet}' == ''
-        RETURN    @{retdict}
+        RETURN    &{retdict}
     END
     Open Excel Document    ${workbook}    wb
     Get Sheet    ${sheet}
@@ -50,7 +50,6 @@ Read Data From xlsx
         Log    ${header}
         ${columntoread}    Evaluate    ${firstcolumn} + ${count}
         ${items}    Read Excel Column    ${columntoread}    1    ${maxdatarange}
-        &{tmpdict}    Create Dictionary    id=${header}    items=${items}
-        Append To List    ${retdict}    ${tmpdict}
+        Set To Dictionary    ${retdict}    ${header}=${items}
     END
-    RETURN    @{retdict}
+    RETURN    &{retdict}
