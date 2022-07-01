@@ -18,8 +18,10 @@ def connect_mqtt():
             print("Connected to MQTT Broker!")
         else:
             print("Failed to connect, return code %d\n", rc)
+
     def on_message(client, userdata, message):
         print("<< Message received " + message.payload.decode())
+
     client = mqtt_client.Client(client_id)
     client.on_connect = on_connect
     client.on_message = on_message
@@ -34,18 +36,20 @@ def publish(client, msg_count):
     # result: [0, 1]
     status = result[0]
     if status == 0:
-        print(f"Send `{msg}` to topic `{topic}`")
+        print(f">> Send `{msg}` to topic `{topic}`")
     else:
-        print(f"Failed to send message to topic {topic}")
+        print(f">> Failed to send message to topic {topic}")
 
 
 def run():
     client = connect_mqtt()
     client.subscribe(topic, qos=1)
-    client.publish(topic, '{"emei": 123456789,\
+    client.publish(
+        topic,
+        '{"emei": 123456789,\
                             "status": 1\
-                            }'
-                    )
+                            }',
+    )
     client.loop_start()
     for i in range(0, 10):
         publish(client, i)
