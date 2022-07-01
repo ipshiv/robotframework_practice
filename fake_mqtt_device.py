@@ -39,6 +39,10 @@ def publish(client, msg_count):
 
 def run():
     client = connect_mqtt()
+    client.publish(topic, '{"emei": 123456789,\
+                            "status": 1\
+                            }'
+                    )
     client.loop_start()
     for i in range(0, 10):
         publish(client, i)
