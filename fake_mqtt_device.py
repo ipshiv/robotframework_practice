@@ -7,7 +7,8 @@ from paho.mqtt import client as mqtt_client
 
 broker = "broker.emqx.io"
 port = 1883
-topic = "huld/rfmqtt"
+topic_sub = "huld/rfmqtt/sub"
+topic_pub = "huld/rfmqtt/pub"
 # generate client ID with pub prefix randomly
 client_id = f"python-mqtt-{random.randint(0, 1000)}"
 
@@ -32,23 +33,21 @@ def connect_mqtt():
 def publish(client, msg_count):
     time.sleep(1)
     msg = f"messages: {msg_count}"
-    result = client.publish(topic, msg)
+    result = client.publish(topic_pub, msg)
     # result: [0, 1]
     status = result[0]
     if status == 0:
-        print(f">> Send `{msg}` to topic `{topic}`")
+        print(f">> Send `{msg}` to topic `{topic_pub}`")
     else:
-        print(f">> Failed to send message to topic {topic}")
+        print(f">> Failed to send message to topic {topic_pub}")
 
 
 def run():
     client = connect_mqtt()
-    client.subscribe(topic, qos=1)
+    client.subscribe(topic_sub, qos=1)
     client.publish(
-        topic,
-        '{"emei": 123456789,\
-                            "status": 1\
-                            }',
+        topic_pub,
+        '{"emei": 123456789, "status": 1}',
     )
     client.loop_start()
     for i in range(0, 10):
